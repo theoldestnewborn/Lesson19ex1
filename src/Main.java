@@ -15,9 +15,7 @@ public class Main {
 
             File file = new File(fileName);
             PrintWriter pw = new PrintWriter(file);
-            String poem = saxParser.saxParse(path);
-            pw.print(poem); //почему нельзя напрямую передать saxParser.saxParse(path)?
-
+            pw.write(saxParser.saxParse(path));
             pw.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
