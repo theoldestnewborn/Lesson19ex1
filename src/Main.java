@@ -15,40 +15,40 @@ public class Main {
         String fileName;
         Scanner scanner = new Scanner(System.in);
         System.out.println("1 or 2");
-        String choice = scanner.next();
 
-        switch (choice) {
-            case "1":
-                try {
-                    fileName = domParser.parseName(path);
-                    PrintWriter pw = new PrintWriter(fileName);
-                    pw.write(domParser.parseDom(path));
-                    pw.close();
-                } catch (IOException | ParserConfigurationException | SAXException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
+        for (; ; ) {
 
-            case "2":
-                try {
-                    saxParser.getName(path);
-                    saxParser.getSecondName(path);
-                    fileName = saxParser.getFileName(path);
+            String choice = scanner.next();
+            switch (choice) {
+                case "1":
+                    try {
+                        fileName = domParser.parseName(path);
+                        PrintWriter pw = new PrintWriter(fileName);
+                        pw.write(domParser.parseDom(path));
+                        pw.close();
+                    } catch (IOException | ParserConfigurationException | SAXException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return;
 
-                    File file = new File(fileName);
-                    PrintWriter pw = new PrintWriter(file);
-                    pw.write(saxParser.saxParse(path));
-                    pw.close();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                break;
+                case "2":
+                    try {
+                        saxParser.getName(path);
+                        saxParser.getSecondName(path);
+                        fileName = saxParser.getFileName(path);
 
-            default:
-                System.out.println("1 or 2");
-                break;
+                        File file = new File(fileName);
+                        PrintWriter pw = new PrintWriter(file);
+                        pw.write(saxParser.saxParse(path));
+                        pw.close();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                    return;
+
+                default:
+                    System.out.println("choose 1 or 2");
+            }
         }
-
-
     }
 }
